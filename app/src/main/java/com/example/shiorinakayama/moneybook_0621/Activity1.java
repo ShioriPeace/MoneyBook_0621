@@ -16,6 +16,24 @@ public class Activity1 extends AppCompatActivity {
    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        MyView1 myView =new MyView1(this);
+        setContentView(myView);
+    }
+    class MyView1 extends View{
+        private Paint paint;
+
+        public  MyView1(Context context){
+            super(context);
+            paint = new Paint();
+        }
+
+        @Override
+        protected void onDraw(Canvas canvas) {
+            paint.setARGB(255,132,255,193);
+            canvas.drawCircle(550,400,350, paint);
+        }
+
+
 
     }
 
@@ -31,6 +49,7 @@ public class Activity1 extends AppCompatActivity {
         switch (item.getItemId()){
             case R.id.item_top:
                 finish();
+
                 return true;
 
             case R.id.item1:
