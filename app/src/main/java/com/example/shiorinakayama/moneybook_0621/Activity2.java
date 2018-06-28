@@ -37,6 +37,12 @@ public class Activity2 extends AppCompatActivity {
                 finish();
                 Intent varIntent2 = new Intent(Activity2.this,Activity2.class);
                 startActivity(varIntent2);
+
+            case R.id.item3:
+                finish();
+                Intent varIntent3 = new Intent(Activity2.this,Activity3.class);
+                startActivity(varIntent3);
+                return true;
         }
         return super.onOptionsItemSelected(item);
 

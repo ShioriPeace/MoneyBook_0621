@@ -132,6 +132,11 @@ public class MainActivity extends AppCompatActivity {
                 Intent varIntent2 = new Intent(MainActivity.this,Activity2.class);
                 startActivity(varIntent2);
                 return true;
+
+            case R.id.item3:
+                Intent varIntent3 = new Intent(MainActivity.this,Activity3.class);
+                startActivity(varIntent3);
+                return true;
         }
         return super.onOptionsItemSelected(item);
     }
