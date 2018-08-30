@@ -22,13 +22,6 @@
             android:label="@string/app_name">
         </activity>
 
-        <activity
-            android:name=".Activity3"
-            android:label="@string/app_name">
-
-
-        </activity>
-
     </application>
 
 </manifest>

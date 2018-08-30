@@ -7,6 +7,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
+import android.nfc.Tag;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.Menu;
@@ -15,6 +16,7 @@ import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.TextView;
+import android.util.Log;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -24,6 +26,8 @@ public class MainActivity extends AppCompatActivity {
         MyView myView = new MyView(this);
         setContentView(myView);
 
+
+
     }
 
 
@@ -31,9 +35,11 @@ public class MainActivity extends AppCompatActivity {
         private Paint paint;
         private float xRect = 0;
         private float xRect2 = 0;
+        private float xRect3 = 0;
         private float yRect = 0;
-        private float xa = 140 + xRect;
-        private float xb = 140 + xRect2;
+        private final String TAG = "Square_1";
+        private float rest;
+        private float a;
 
         final TextView textView = (TextView)findViewById(R.id.all);
 
@@ -43,8 +49,9 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public boolean onTouchEvent(MotionEvent event) {
             xRect = event.getX();
-            xRect2 = event.getX();
             yRect = event.getY();
+            Log.d("TouchEvent","Y:"+yRect);
+
 
             this.invalidate();
 
@@ -74,28 +81,42 @@ public class MainActivity extends AppCompatActivity {
             paint.setStyle(Paint.Style.FILL_AND_STROKE);
             canvas.drawCircle(550, 400, 170, paint);
             //白い弧
-            canvas.drawArc(150,40,1050,850,0,0 + xRect/5 + xRect2/5,true,paint);
+            canvas.drawArc(150,40,1050,850,0,0 - xRect/5 - xRect2/5,true,paint);
 
-            if (yRect<1250) {
-                xRect = 0;
 
-            } else {
 
-                xRect2 = 0;
-
-            }
             //ピンク短形
             paint.setColor(Color.argb(255, 255, 142, 198));
             paint.setStyle(Paint.Style.FILL_AND_STROKE);
-            canvas.drawRect(0, 1300, 180 + xRect, 1500, paint);
+            canvas.drawRect(0 , 1500 , 220, 1250, paint);
+           // Log.d("onTouchEvent","ピンクを引っ張っている長さは「"+ 180+xRect+"」");
+
+
+
             //アイコン
-            canvas.drawBitmap(eat,0 + xRect,1300,paint);
+            //canvas.drawBitmap(eat,500 + xRect,1300,paint);
 
             //青短径
             paint.setColor(Color.argb(255, 147, 201, 255));
             paint.setStyle(Paint.Style.FILL_AND_STROKE);
-            canvas.drawRect(0, 1050, 185 + xRect2, 1250, paint);
-            canvas.drawBitmap(shirt,0 + xRect2,1050,paint);
+            canvas.drawRect(0, 950, 220+xRect , 1200, paint);
+            //canvas.drawBitmap(shirt,0 ,1050,paint);
+
+            //テキスト
+            Paint textPaint = new Paint(Paint.ANTI_ALIAS_FLAG);
+            textPaint.setTextSize(50);
+
+            if (yRect>950 && yRect<1200 ) {
+                xRect = 0;//範囲外のところをタップしてもバーが伸びる
+                /**String text = "cat";
+                 canvas.drawText(text,700,700,textPaint);**/
+
+            }
+            rest = xRect;
+
+            String text = ""+rest+"";
+            canvas.drawText(text,500,400,textPaint  );
+
 
 
         }
@@ -128,15 +149,7 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(varIntent1);
                 return true;
 
-            case R.id.item2:
-                Intent varIntent2 = new Intent(MainActivity.this,Activity2.class);
-                startActivity(varIntent2);
-                return true;
 
-            case R.id.item3:
-                Intent varIntent3 = new Intent(MainActivity.this,Activity3.class);
-                startActivity(varIntent3);
-                return true;
         }
         return super.onOptionsItemSelected(item);
     }
