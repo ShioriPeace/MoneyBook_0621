@@ -21,12 +21,6 @@
             android:name=".Activity1"
             android:label="@string/app_name">
         </activity>
-        <activity
-            android:name=".Activity2"
-            android:label="@string/app_name">
-
-
-        </activity>
 
     </application>
 
